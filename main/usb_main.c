@@ -136,7 +136,7 @@ void handle_new_device(void *vparam){
                 translate_model_t model = detect_translate_model(report_map, length);
                 
                 
-                if(model == MOUSE){
+                /*if(model == MOUSE){
                     parse_result_t *parse_result = parse_report_map(report_map, length);
                     if(parse_result != NULL && parse_result->report_id_count <= 1){
                         make_mouse_translate(parse_result, &install_status->mouse_translate);
@@ -144,7 +144,7 @@ void handle_new_device(void *vparam){
                         printf("usb %d hid %d now work in mouse translate mode\n", usb->selfNum, i);
                     }
                     free_parse_result(parse_result);
-                }
+                }*/
 
                 if(install_status->mode == PROCESS_MODE_NONE){
                     printf("usb %d hid %d translate filed,now switch to passthough mode \n", usb->selfNum, i);
