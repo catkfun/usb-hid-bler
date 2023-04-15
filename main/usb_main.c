@@ -213,7 +213,7 @@ void usb_recv(void *param)
                     break;
                 case PROCESS_MODE_TRANSLATE_MOUSE:{
                     static standard_mouse_report_t report_out;
-		    status->mouse_translate->y->defined = 1;
+		    status->mouse_translate.y.defined = 1;
                     translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
                     printf("translate report id %d \n", report_out.report_id);
                     print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
