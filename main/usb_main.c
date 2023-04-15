@@ -204,7 +204,6 @@ void usb_recv(void *param)
             }
             switch(status->mode){
                 case PROCESS_MODE_NONE: continue;
-		case PROCESS_MODE_TRANSLATE_MOUSE:
                 case PROCESS_MODE_PASSTHROUGH:
                     ble_send(status->mapid + PREDEFINED_MAP_COUNT, 0, msg_data, length);
                     if(debug_print){
@@ -212,16 +211,17 @@ void usb_recv(void *param)
                         print_hex_dump("", msg_data, length);
                     }
                     break;
-                /*case PROCESS_MODE_TRANSLATE_MOUSE:{
+                case PROCESS_MODE_TRANSLATE_MOUSE:{
                     static standard_mouse_report_t report_out;
+		    status->mouse_translate->y->defined = 1;
                     translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
-                    //printf("translate report id %d \n", report_out.report_id);
-                    //print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
+                    printf("translate report id %d \n", report_out.report_id);
+                    print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
                     if(!macro_handle_mouse_input(&report_out)){
                         ble_send(0, report_out.report_id, ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
                     }
                     break;
-                }*/
+                }
                 default: continue;
             };
             //printf("\nfrom: %02x len: %02x data:",msg.src,msg.len);
