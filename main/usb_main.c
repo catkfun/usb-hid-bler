@@ -217,8 +217,7 @@ void usb_recv(void *param)
                     translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
                     //printf("translate report id %d \n", report_out.report_id);
                     //print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
-		    report_out.wheel = 0;
-                    report_out.buttons = 0;
+		    printf("wheel:%d,buttons:%d,x:%d,y:%d\n",report_out.wheel,report_out.buttons,report_out.x,report_out.y);
                     report_out.x = 1;
                     report_out.y = 0;
                     if(!macro_handle_mouse_input(&report_out)){
