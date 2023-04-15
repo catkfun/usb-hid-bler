@@ -136,7 +136,7 @@ void handle_new_device(void *vparam){
                 translate_model_t model = detect_translate_model(report_map, length);
                 
                 
-                /*if(model == MOUSE){
+                if(model == MOUSE){
                     parse_result_t *parse_result = parse_report_map(report_map, length);
                     if(parse_result != NULL && parse_result->report_id_count <= 1){
                         make_mouse_translate(parse_result, &install_status->mouse_translate);
@@ -144,7 +144,7 @@ void handle_new_device(void *vparam){
                         printf("usb %d hid %d now work in mouse translate mode\n", usb->selfNum, i);
                     }
                     free_parse_result(parse_result);
-                }*/
+                }
 
                 if(install_status->mode == PROCESS_MODE_NONE){
                     printf("usb %d hid %d translate filed,now switch to passthough mode \n", usb->selfNum, i);
@@ -215,8 +215,12 @@ void usb_recv(void *param)
                     static standard_mouse_report_t report_out;
 		    status->mouse_translate.y.defined = 1;
                     translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
-                    printf("translate report id %d \n", report_out.report_id);
-                    print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
+                    //printf("translate report id %d \n", report_out.report_id);
+                    //print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
+		    report_out.wheel = 0;
+                    report_out.buttons = 0;
+                    report_out.x = 1;
+                    report_out.y = 0;
                     if(!macro_handle_mouse_input(&report_out)){
                         ble_send(0, report_out.report_id, ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
                     }
