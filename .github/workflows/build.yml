@@ -35,6 +35,7 @@ jobs:
       run: |
         cd ${GITHUB_WORKSPACE}/hid-bler
         . ${GITHUB_WORKSPACE}/esp-idf/export.sh
+        sed -ie 's/ONFIG_SOC_SPI_MEM_SUPPORT_AUTO_SUSPEND=y/ONFIG_SOC_SPI_MEM_SUPPORT_AUTO_SUSPEND=n/g' sdkconfig
         idf.py build
     - name: upload firmware
       uses: actions/upload-artifact@v3
