@@ -197,7 +197,7 @@ void usb_recv(void *param)
             install_status_t *status = &install_statuses[usbid][hidid];
 
             uint8_t *msg_data = msg.data;
-            const bool debug_print = true;
+            const bool debug_print = false;
             if(debug_print){
                 printf("msg from usb%d/hid%d", usbid, hidid);
                 print_hex_dump(" ", msg_data, length);
@@ -227,7 +227,7 @@ void usb_recv(void *param)
                     yt = yt | (msg_data[2] >> 4);
                     if((msg_data[3] & 0x80) == 0x80) yt = yt | 0xf000;
                     report_out.y = yt;
-		    printf("wheel:%d,buttons:%d,x:%d,y:%d\n",report_out.wheel,report_out.buttons,report_out.x,report_out.y);
+		    //printf("wheel:%d,buttons:%d,x:%d,y:%d\n",report_out.wheel,report_out.buttons,report_out.x,report_out.y);
                     if(!macro_handle_mouse_input(&report_out)){
                         ble_send(0, report_out.report_id, ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
                     }
