@@ -218,14 +218,14 @@ void usb_recv(void *param)
                     //printf("translate report id %d \n", report_out.report_id);
                     //print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
 		    
-                    uint16_t xt = msg_data[2] && 0x0f;
+                    uint16_t xt = msg_data[2] & 0x0f;
                     xt = xt << 8;
-                    xt = xt || msg_data[1];
-                    if(msg_data[2] && 0x08 == 0x08) xt = xt || 0xf000;
+                    xt = xt | msg_data[1];
+                    if(msg_data[2] & 0x08 == 0x08) xt = xt | 0xf000;
                     report_out.x = xt;
                     uint16_t yt = msg_data[3] << 4;
-                    yt = yt || msg_data[2] >> 4;
-                    if(msg_data[3] && 0x80 == 0x80) yt = yt || 0xf000;
+                    yt = yt | (msg_data[2] >> 4);
+                    if(msg_data[3] & 0x80 == 0x80) yt = yt | 0xf000;
                     report_out.y = yt;
 		    printf("wheel:%d,buttons:%d,x:%d,y:%d\n",report_out.wheel,report_out.buttons,report_out.x,report_out.y);
                     if(!macro_handle_mouse_input(&report_out)){
