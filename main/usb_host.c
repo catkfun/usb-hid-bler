@@ -1399,12 +1399,12 @@ void IRAM_ATTR fsm_Mashine()
 		return;
 	 }else if(current->fsm_state == 661){
 		int len = current->hid[current->hid_report_desc_count].wDescriptorLength;
-		printf("len:%d\n",len);
+		//printf("len:%d\n",len);
 		if(current->acc_decoded_resp_counter==len)
 		{
 			memcpy(&current->hid_report_desc_buffer[current->hid_report_desc_count],current->acc_decoded_resp,len);
 			current->hid_report_desc_count ++;
-			printf("hid_count:%d,current->hid_report_desc_count:%d\n",current->hid_count,current->hid_report_desc_count);
+			//printf("hid_count:%d,current->hid_report_desc_count:%d\n",current->hid_count,current->hid_report_desc_count);
 			if(current->hid_report_desc_count == current->hid_count){
 				current->ufPrintDesc |= 32;
 				current->fsm_state    = 98;
