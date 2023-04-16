@@ -268,7 +268,7 @@ void usb_init()
     usb_mess_Que  = xQueueCreate(32,sizeof(struct USBMessage));
     xTaskCreate(&handle_new_device, "install_device", 4096, NULL, 1, NULL);
     xTaskCreatePinnedToCore(&usb_recv, "usb_recv", 4096, NULL, 5, NULL, 0);
-    xTaskCreate(&usb_print_task, "usb_print", 4096, NULL, 0, NULL);
+    //xTaskCreate(&usb_print_task, "usb_print", 4096, NULL, 0, NULL);
 
     timer_config_t config = {
         .divider = TIMER_DIVIDER,
