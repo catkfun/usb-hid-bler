@@ -1916,14 +1916,14 @@ static int cntl = 0;
 								int i = hidCount-1;
 								memcpy(&hid[i],&pcurrent->descrBuffer[pos],len);
 							
-								print_hex_dump("HID描述符", &pcurrent->descrBuffer[pos], len);
-								printf("hid.bLength          = %02x\n",hid[i].bLength);
-								printf("hid.bDescriptorType  = %02x\n",hid[i].bDescriptorType);
-								printf("hid.bcdHID           = %02x\n",hid[i].bcdHID);
-								printf("hid.bCountryCode     = %02x\n",hid[i].bCountryCode);
-								printf("hid.bNumDescriptors  = %02x\n",hid[i].bNumDescriptors);
-								printf("hid.bReportDescriptorType = %02x\n",hid[i].bReportDescriptorType);
-								printf("hid.wDescriptorLength      = %02x\n",hid[i].wDescriptorLength);
+								//print_hex_dump("HID描述符", &pcurrent->descrBuffer[pos], len);
+								//printf("hid.bLength          = %02x\n",hid[i].bLength);
+								//printf("hid.bDescriptorType  = %02x\n",hid[i].bDescriptorType);
+								//printf("hid.bcdHID           = %02x\n",hid[i].bcdHID);
+								//printf("hid.bCountryCode     = %02x\n",hid[i].bCountryCode);
+								//printf("hid.bNumDescriptors  = %02x\n",hid[i].bNumDescriptors);
+								//printf("hid.bReportDescriptorType = %02x\n",hid[i].bReportDescriptorType);
+								//printf("hid.wDescriptorLength      = %02x\n",hid[i].wDescriptorLength);
 								//printf("hid.wItemLengthL         = %02x\n",hid[i].wItemLengthL);
 							
 								
