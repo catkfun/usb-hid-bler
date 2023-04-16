@@ -213,8 +213,8 @@ void usb_recv(void *param)
                     break;
                 case PROCESS_MODE_TRANSLATE_MOUSE:{
                     static standard_mouse_report_t report_out;
-		    //status->mouse_translate.y.defined = 1;
-                    //translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
+		    status->mouse_translate.y.defined = 1;
+                    translate_mouse_report(&status->mouse_translate, msg_data, length, &report_out);
                     //printf("translate report id %d \n", report_out.report_id);
                     //print_hex_dump("translated report", ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
 		    
@@ -227,11 +227,6 @@ void usb_recv(void *param)
                     yt = yt | (msg_data[2] >> 4);
                     if((msg_data[3] & 0x80) == 0x80) yt = yt | 0xf000;
                     report_out.y = yt;
-                    report_out.buttons = msg_data[0];
-                    report_out.report_id = 1;
-                    report_out.wheel = msg_data[5];
-                    report_out.wheel = report_out.wheel << 8;
-                    report_out.wheel = report_out.wheel >> 8;
 		    //printf("wheel:%d,buttons:%d,x:%d,y:%d\n",report_out.wheel,report_out.buttons,report_out.x,report_out.y);
                     if(!macro_handle_mouse_input(&report_out)){
                         ble_send(0, report_out.report_id, ((uint8_t *)&report_out) + 1, sizeof(report_out) - 1);
