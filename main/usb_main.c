@@ -197,7 +197,7 @@ void usb_recv(void *param)
             install_status_t *status = &install_statuses[usbid][hidid];
 
             uint8_t *msg_data = msg.data;
-            const bool debug_print = false;
+            const bool debug_print = true;
             if(debug_print){
                 printf("msg from usb%d/hid%d", usbid, hidid);
                 print_hex_dump(" ", msg_data, length);
